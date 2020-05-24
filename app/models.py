@@ -25,12 +25,20 @@ class User(AbstractUser):
 
 class Doctor(models.Model):
     person = models.OneToOneField(User, on_delete=models.CASCADE)
-    Speciality = models.CharField(max_length=100 , default=None,blank=True)
+    Department = models.CharField(max_length=100 , default=None,blank=True)
     Address = models.CharField(max_length=100 , default=None,blank=True)
-    Email = models.CharField(max_length=100 , default=None,blank=True)
     Phone = models.CharField(max_length=100 , default=None,blank=True)
     gender = models.CharField(max_length=100 , default=None,blank=True)
-
+    STATUS = (
+        (1, 'Active'),
+        (0, 'Not_Active'),
+    )
+    status = models.IntegerField(
+        choices=STATUS,
+        default=1
+    )
+    attendance=models.IntegerField(null=True,blank=True)
+    salary=models.IntegerField(null=True,blank=True)
     def __str__(self):
         return self.person.username
 

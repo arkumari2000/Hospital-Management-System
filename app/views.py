@@ -100,7 +100,7 @@ def profile(request):
             p_form=PatientForm(request.POST)
             if u_form.is_valid():
                 u_form=UserUpdationForm(request.POST,instance=request.user)
-                p_form=PatientForm(request.POST,instance=doctor)
+                p_form=DoctorForm(request.POST,instance=doctor)
                 u_form.save()
                 p_form.save()
                 return redirect('profile')

@@ -32,8 +32,12 @@ class PatientForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ('Address', 'Email', 'Phone', 'gender', 'Speciality',)
+        fields = ('Address', 'Phone', 'gender', 'Department')
 
+class UpdateDoctorForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = ('Address', 'Phone', 'gender', 'Department')
 
 class ReceptionistForm(forms.ModelForm):
     class Meta:
