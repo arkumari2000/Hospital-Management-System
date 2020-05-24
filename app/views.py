@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect,HttpResponse
 from .forms import UserRegisterForm , PatientForm , DoctorForm , UpdateForm, ReceptionistForm
 from django.views.generic import View
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,logout,login
 
 # Create your views here.
 def index(request):
@@ -23,3 +26,8 @@ def register(request):
     else:
         u_form = UserRegisterForm()
     return render(request, 'register.html', {'u_form': u_form,})
+
+@login_required(login_url='login')
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

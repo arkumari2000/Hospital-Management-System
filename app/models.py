@@ -11,7 +11,7 @@ class User(AbstractUser):
       (3, 'HR'),
       (4, 'Receptionist'),
   )
-  user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES,null=True)
+  user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
 
 class Doctor(models.Model):
     person = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -80,3 +80,5 @@ class Prescription(models.Model):
     Date = models.DateField(("Date"), default=datetime.date.today)
     Symptoms = models.CharField(max_length=100)
     Description = models.TextField()
+
+# class Invoice

@@ -1,9 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Main Page for some time</title>
-</head>
-<body>
-	Hello there
-</body>
-</html>
+{% extends 'base.html' %}
+{% block body %}
+{% if user.is_authenticated %}
+	{% if user.user_type is 1 %}
+	{% include "navDoc.html" %}
+	{% elif user.user_type is 2 %}
+	{% include "navPat.html" %}
+	{% elif user.user_type is 3 %}
+	{% include "navHR.html" %}
+	{% elif user.user_type is 4 %}
+	{% include "navRec.html" %}
+	{% endif %}
+{% else %}
+{% include "navbar.html" %}
+{% endif %}
+{% endblock body %}
