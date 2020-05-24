@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User,Doctor,Receptionist,Patient,Appointment
+from .models import User,Doctor,Receptionist,Patient,Appointment,Invoice,Prescription
 from django.utils.translation import gettext, gettext_lazy as _
 
 @admin.register(User)
@@ -20,3 +20,5 @@ admin.site.register(Doctor)
 admin.site.register(Receptionist)
 admin.site.register(Patient)
 admin.site.register(Appointment)
+admin.site.register(Prescription)
+admin.site.register(Invoice)

@@ -19,11 +19,15 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['first_name','last_name','username', 'email', 'password1', 'password2','user_type']
 
+class UserUpdationForm(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=['first_name','last_name','email']
 
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ('Address', 'Email', 'Phone', 'gender', 'location', 'bio')
+        fields = ('Address', 'Phone', 'gender', 'case_paper','records','blood_group', 'age')
 
 class DoctorForm(forms.ModelForm):
     class Meta:
@@ -41,7 +45,7 @@ class AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ['Doctor', 'Date']
+        fields = ['doctor', 'date']
 
 class PrescriptionForm(forms.ModelForm):
     Description=forms.CharField(label=_("Prescription"),)
@@ -49,7 +53,7 @@ class PrescriptionForm(forms.ModelForm):
 
     class Meta:
         model=Prescription
-        fields= ['Description','Symptoms','Patient']
+        fields= ['Description','Symptoms','patient']
 
 class Login(forms.ModelForm):
 

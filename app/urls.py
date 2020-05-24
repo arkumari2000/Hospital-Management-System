@@ -15,4 +15,7 @@ urlpatterns = [
     path('hrdashboard', views.hrdashboard, name='hrdashboard'),
     path('recdashboard', views.recdashboard, name='recdashboard'),
     path('account', views.account, name='account'),
+    path('invoice', views.invoice, name='invoice'),
+    path('profile', views.profile, name='profile'),
+    path('create_prescription', views.create_prescription, name='create_prescription'),
 ]
