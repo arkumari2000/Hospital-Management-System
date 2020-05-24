@@ -18,5 +18,6 @@ urlpatterns = [
     path('invoice', views.invoice, name='invoice'),
     path('profile', views.profile, name='profile'),
     path('profile/<int:id>', views.profile, name='profile_update'),
+    path('delete/<int:id>', views.delete, name='profile_delete'),
     path('create_prescription', views.create_prescription, name='create_prescription'),
 ]

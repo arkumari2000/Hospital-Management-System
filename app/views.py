@@ -145,6 +145,12 @@ def profile(request,id=None):
     else:
         return redirect('index')
 
+def delete(request,id):
+    if request.user.user_type==3:
+        doctor=Doctor.objects.filter(id=id).first()
+        doctor.delete()
+        return redirect('hrdashboard')
+
 def create_prescription(request):
     if request.user.user_type==1:
         form=PrescriptionForm()

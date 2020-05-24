@@ -88,7 +88,7 @@
             
           </td>
           <td>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger"><a href="{% url 'profile_delete' doctor.id %}">Delete</a></button>
           </td>
         </tr>
         {% endfor %}
