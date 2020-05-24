@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        padding: 0px 20px 50px 20px;
+        font-family: "Balsamiq Sans", cursive;
+        background-color: #e0dfdf;
+      }
+      .pallet {
+        padding: 2rem;
+      }
+      .pallet section:first-child {
+        padding: 1rem;
+      }
+      .pallet section:last-child {
+        padding: 1.5rem;
+      }
+      .table-dash {
+        background-color: #fff;
+        width: 100%;
+        padding: 1rem;
+      }
+      .table-dash button {
+        width: 100%;
+      }
+      h4 {
+        border-bottom: dotted 1px grey;
+        padding-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-4 pallet">
+        <section class="bg-info text-center rounded-top">
+          <div class="container">
+            <h5 style="margin-bottom: 0px;">Total Doctor</h5>
+          </div>
+          <!-- /.container-->
+        </section>
+
+        <section class="bg-primary text-center rounded-bottom">
+          <div class="container h2">
+            5
+          </div>
+        </section>
+      </div>
+      <div class="col-md-4 pallet">
+        <section class="bg-info text-center rounded-top">
+          <div class="container">
+            <h5 style="margin-bottom: 0px;">Total Patient</h5>
+          </div>
+          <!-- /.container-->
+        </section>
+
+        <section class="bg-primary text-center rounded-bottom">
+          <div class="container h2">
+            5
+          </div>
+        </section>
+      </div>
+      <div class="col-md-4 pallet">
+        <section class="bg-info text-center rounded-top">
+          <div class="container">
+            <h5 style="margin-bottom: 0px;">On Duty Doctor</h5>
+          </div>
+          <!-- /.container-->
+        </section>
+
+        <section class="bg-primary text-center rounded-bottom">
+          <div class="container h2">
+            5
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <h4>Doctors</h4>
+      <div class="table-dash">
+        <button type="button" class="btn btn-primary">
+          Docotrs
+        </button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Status</th>
+              <th>Department</th>
+              <th>Attendence</th>
+              <th>Salary</th>
+              <th>Update</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John</td>
+              <td>123873295</td>
+              <td>john@sdf.com</td>
+              <td>F</td>
+              <td>23</td>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+              <td>
+                <button type="button" class="btn btn-info">Update</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

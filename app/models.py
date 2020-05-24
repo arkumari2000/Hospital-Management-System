@@ -48,9 +48,10 @@ class Patient(models.Model):
         return self.person.user.username
 
 class Appointment(models.Model):
-    user = models.ForeignKey(Patient, null=True,on_delete=models.CASCADE)
+    Patient = models.ForeignKey(Patient, null=True,on_delete=models.CASCADE)
     Doctor = models.ForeignKey(Doctor, default=None,on_delete=models.CASCADE)
     Date = models.DateField(("Date"), default=datetime.date.today)
+    Time = models.TimeField(auto_now_add=True)
     Pending= 'PD'
     Approved= 'AP'
     Rejected = 'RJ'
@@ -72,3 +73,10 @@ class Appointment(models.Model):
 
     def get_absolute_url(self):
         return reverse('index')
+
+class Prescription(models.Model):
+    Patient = models.ForeignKey(Patient, null=True,on_delete=models.CASCADE)
+    Doctor = models.ForeignKey(Doctor, default=None,on_delete=models.CASCADE)
+    Date = models.DateField(("Date"), default=datetime.date.today)
+    Symptoms = models.CharField(max_length=100)
+    Description = models.TextField()
