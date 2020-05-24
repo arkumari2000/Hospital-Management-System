@@ -52,7 +52,15 @@ def contact(request):
 
 
 def hrdashboard(request):
-    return render(request, 'HRdashboard.html')
+    doctors=Doctor.objects.all()
+    active=Doctor.objects.filter(status=1).count()
+    patients=Patient.objects.all().count()
+    context={
+    'doctors':doctors,
+    'active':active,
+    'patients':patients,
+    }
+    return render(request, 'HRdashboard.html',context)
 
 
 def recdashboard(request):
@@ -90,7 +98,7 @@ def invoice(request):
         invoices=("-","-","-","-")
     return render(request, 'invoice.html',{'invoices':invoices,})
 # def create_prescription(request):
-def profile(request):
+def profile(request,id=None):
     if request.user.user_type==1:
         doctor=request.user.doctor
         u_form=UserUpdationForm(instance=request.user)
@@ -118,6 +126,21 @@ def profile(request):
                 u_form.save()
                 p_form.save()
                 return redirect('profile')
+        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
+    elif request.user.user_type==3:
+        doctor=Doctor.objects.filter(id=id).first()
+        user=doctor.person
+        u_form=UserUpdationForm(instance=doctor.person)
+        p_form=DoctorForm(instance=doctor)
+        if request.method=='POST':
+            u_form=UserUpdationForm(request.POST)
+            p_form=PatientForm(request.POST)
+            if u_form.is_valid():
+                u_form=UserUpdationForm(request.POST,instance=doctor.person)
+                p_form=DoctorForm(request.POST,instance=doctor)
+                u_form.save()
+                p_form.save()
+                return redirect('hrdashboard')
         return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
     else:
         return redirect('index')

@@ -17,5 +17,6 @@ urlpatterns = [
     path('account', views.account, name='account'),
     path('invoice', views.invoice, name='invoice'),
     path('profile', views.profile, name='profile'),
+    path('profile/<int:id>', views.profile, name='profile_update'),
     path('create_prescription', views.create_prescription, name='create_prescription'),
 ]

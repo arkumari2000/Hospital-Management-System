@@ -12,7 +12,7 @@
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        5
+        {{ doctors.count }}
       </div>
     </section>
   </div>
@@ -26,7 +26,7 @@
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        5
+        {{ patients }} 
       </div>
     </section>
   </div>
@@ -40,7 +40,7 @@
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        5
+        {{ active }}
       </div>
     </section>
   </div>
@@ -68,23 +68,30 @@
         </tr>
       </thead>
       <tbody>
+        {% for doctor in doctors %}
         <tr>
-          <td>John</td>
-          <td>123873295</td>
-          <td>john@sdf.com</td>
-          <td>F</td>
-          <td>23</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
+          <td>{{ doctor.person.first_name }} {{ doctor.person.last_name }}</td>
+          <td>{{ doctor.Phone }}</td>
+          <td>{{ doctor.person.email }}</td>
+          <td>{{ doctor.gender }}</td>
+          <td>25</td>
+          {% if doctor.status is 1 %}
+          <td>Active</td>
+          {% else %}
+          <td>Not Active</td>
+          {% endif %}
+          <td>{{ doctor.Department }}</td>
+          <td>{{ doctor.salary }}</td>
           <td>--</td>
           <td>
-            <button type="button" class="btn btn-info">Update</button>
+            <button type="button" class="btn btn-info"><a href="{% url 'profile_update' doctor.id %}">Update</a></button>
+            
           </td>
           <td>
             <button type="button" class="btn btn-danger">Delete</button>
           </td>
         </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
