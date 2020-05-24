@@ -1,29 +1,6 @@
-<head>
-      <meta charset="UTF-8">
-      <title>Home</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      {% load static %}
-    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="{% static 'home/welcome.css' %}"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% extends 'base.html' %}
+{% block body %}
 
-
-</head>
-
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">HMS</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        </ul>
-      </div>
-    </nav>
 <h1>Create an account!</h1>
 <div class="container-fluid">
 
@@ -48,3 +25,4 @@
     </div>
 
 </div>
+{% endblock body %}

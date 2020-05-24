@@ -15,16 +15,16 @@
       <!-- Links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="{% url 'index' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="{% url 'about' %}">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Your Appointment's</a>
+          <a class="nav-link" href="{% url 'appointments' %}">Your Appointment's</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Invoice & Payments</a>
@@ -33,7 +33,7 @@
           <a class="nav-link" href="#">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Medical History</a>
+          <a class="nav-link" href="{% url 'prescription' %}">Medical History</a>
         </li>
       </ul>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">

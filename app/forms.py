@@ -1,9 +1,9 @@
 from .models import User
 
 from django import forms
-from .models import  Appointment , Patient , Doctor, Receptionist
+from .models import  Appointment , Patient , Doctor, Receptionist,Prescription
 from django.contrib.auth.forms import UserCreationForm
-
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -43,6 +43,13 @@ class AppointmentForm(forms.ModelForm):
         model = Appointment
         fields = ['Doctor', 'Date']
 
+class PrescriptionForm(forms.ModelForm):
+    Description=forms.CharField(label=_("Prescription"),)
+    Symptoms=forms.CharField(label=_("Disease"),)
+
+    class Meta:
+        model=Prescription
+        fields= ['Description','Symptoms','Patient']
 
 class Login(forms.ModelForm):
 

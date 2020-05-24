@@ -31,6 +31,7 @@
     </style>
   </head>
   <body>
+    {% if user.user_type is 1 %}
     <button type="button" class="btn btn-outline-primary pres-btn">
       Create Prescription
     </button>
@@ -44,5 +45,20 @@
         <p class="text-muted">Patient Name:</p>
       </div>
     </div>
+    {% elif user.user_type is 2 %}
+    <div class="container">
+      <div class="col-md-9 medical-history">
+        <h4>Date</h4>
+        <p class="text-muted">Symptoms:</p>
+        <p class="text-muted">
+          Loreabsd adkahsrbe fsdaufjf yuasdb sdufifg cusdbd uadbyher cvsdyur
+          vu89ngtcty dfdsf cs yuadhj fufbr vctyafde cyudbg cdbfbrg
+        </p>
+        <button type="button" class="btn btn-primary">Learn More</button>
+      </div>
+    </div>
+    {% else %}
+    May be you are at wroong place
+    {% endif %}
   </body>
 </html>
