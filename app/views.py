@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import UserRegisterForm, PatientForm, DoctorForm, UpdateForm, ReceptionistForm, PrescriptionForm,UserUpdationForm
+from .forms import UserRegisterForm, PatientForm, DoctorForm, UpdateForm, ReceptionistForm, PrescriptionForm,UserUpdationForm,UpdateDoctorForm,AppointmentForm
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -64,7 +64,16 @@ def hrdashboard(request):
 
 
 def recdashboard(request):
-    return render(request, 'Rdashboard.html')
+    appointments=Appointment.objects.all()
+    patients=Patient.objects.all()
+    approved=Appointment.objects.filter(status='AP').count()
+    context={
+    'appointments':appointments,
+    'patients':patients,
+    'approved':approved,
+
+    }
+    return render(request, 'Rdashboard.html',context)
 
 
 def account(request):
@@ -131,7 +140,7 @@ def profile(request,id=None):
         doctor=Doctor.objects.filter(id=id).first()
         user=doctor.person
         u_form=UserUpdationForm(instance=doctor.person)
-        p_form=DoctorForm(instance=doctor)
+        p_form=UpdateDoctorForm(instance=doctor)
         if request.method=='POST':
             u_form=UserUpdationForm(request.POST)
             p_form=PatientForm(request.POST)
@@ -148,7 +157,7 @@ def profile(request,id=None):
 def delete(request,id):
     if request.user.user_type==3:
         doctor=Doctor.objects.filter(id=id).first()
-        doctor.delete()
+        doctor.person.delete()
         return redirect('hrdashboard')
 
 def create_prescription(request):
@@ -161,3 +170,15 @@ def create_prescription(request):
             prescription.save()
             return redirect('prescription')
         return render(request,'presform.html',{'form':form,})
+
+def create_appointment(request):
+    if request.user.user_type==4:
+        form=AppointmentForm()
+        if request.method=='POST':
+            form=AppointmentForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('recdashboard')
+        return render(request,'appointment_form.html',{'form':form,})
+    else:
+        raise Http404

@@ -37,7 +37,7 @@ class DoctorForm(forms.ModelForm):
 class UpdateDoctorForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ('Address', 'Phone', 'gender', 'Department')
+        fields = ('Address', 'Phone', 'gender', 'Department','status','attendance','salary')
 
 class ReceptionistForm(forms.ModelForm):
     class Meta:
@@ -49,7 +49,7 @@ class AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ['doctor', 'date']
+        fields = ['doctor', 'date','patient','status']
 
 class PrescriptionForm(forms.ModelForm):
     Description=forms.CharField(label=_("Prescription"),)

@@ -73,19 +73,15 @@ class Appointment(models.Model):
     time = models.TimeField(auto_now_add=True)
     Pending= 'PD'
     Approved= 'AP'
-    Rejected = 'RJ'
     STATUS = (
         (Pending, 'Pending'),
         (Approved, 'Approved'),
-        (Rejected, 'rejected'),
     )
     status = models.CharField(
         max_length=2,
         choices=STATUS,
         default=Pending,
     )
-
-    message = models.CharField(max_length=1000 , default="Pending Approval")
 
     def __str__(self):
         return str(self.patient)

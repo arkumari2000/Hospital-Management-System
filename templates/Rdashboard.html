@@ -12,7 +12,7 @@
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        5
+        {{ appointments.count }}
       </div>
     </section>
   </div>
@@ -26,7 +26,7 @@
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        5
+        {{ approved }}
       </div>
     </section>
   </div>
@@ -40,7 +40,7 @@
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        5
+        {{ appointments.count }} - {{ approved }}
       </div>
     </section>
   </div>
@@ -49,9 +49,10 @@
   <div class="col-md-5">
     <h4>Appointments:</h4>
     <div class="table-dash">
+      <a href="{% url 'create_appointment' %}">
       <button type="button" class="btn btn-primary">
         Create Appointments
-      </button>
+      </button></a>
       <table class="table">
         <thead>
           <tr>
@@ -63,6 +64,15 @@
           </tr>
         </thead>
         <tbody>
+          {% for appointment in appointments %}
+          <tr>
+            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.time }}</td>
+            <td>{{ appointment.doctor.person.first_name }}</td>
+            <td>{{ appointment.patient.person.first_name }}</td>
+            <td>{{ appointment.status }}</td>
+          </tr>
+          {% endfor %}
           <tr>
             <td>John</td>
             <td>Doe</td>
