@@ -11,18 +11,10 @@ class User(AbstractUser):
       (3, 'HR'),
       (4, 'Receptionist'),
   )
-
-  user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
-
-class Person(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    type = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.user.username
+  user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES,null=True)
 
 class Doctor(models.Model):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE)
+    person = models.OneToOneField(User, on_delete=models.CASCADE)
     Speciality = models.CharField(max_length=100 , default=None)
     Address = models.CharField(max_length=100 , default=None)
     Email = models.CharField(max_length=100 , default=None)
@@ -33,7 +25,7 @@ class Doctor(models.Model):
         return self.person.user.username
 
 class Receptionist(models.Model):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE)
+    person = models.OneToOneField(User, on_delete=models.CASCADE)
     Address = models.CharField(max_length=100 , default=None)
     Email = models.CharField(max_length=100 , default=None)
     Phone = models.CharField(max_length=100 , default=None)
@@ -44,7 +36,7 @@ class Receptionist(models.Model):
 
 
 class Patient(models.Model):
-    person = models.OneToOneField(Person, on_delete=models.CASCADE)
+    person = models.OneToOneField(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=500 , blank=True , default='')
     bio = models.CharField(max_length=500, blank=True)
     Address = models.CharField(max_length=100 , default=None)
@@ -56,8 +48,8 @@ class Patient(models.Model):
         return self.person.user.username
 
 class Appointment(models.Model):
-    user = models.ForeignKey(User, null=True,on_delete=models.CASCADE)
-    Doctor = models.ForeignKey(Doctor , default=None,on_delete=models.CASCADE)
+    user = models.ForeignKey(Patient, null=True,on_delete=models.CASCADE)
+    Doctor = models.ForeignKey(Doctor, default=None,on_delete=models.CASCADE)
     Date = models.DateField(("Date"), default=datetime.date.today)
     Pending= 'PD'
     Approved= 'AP'

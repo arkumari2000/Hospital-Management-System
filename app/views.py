@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from .forms import UserRegisterForm , PatientForm , DoctorForm , PersonForm , UpdateForm, ReceptionistForm
+from django.shortcuts import render,redirect
+from .forms import UserRegisterForm , PatientForm , DoctorForm , UpdateForm, ReceptionistForm
 from django.views.generic import View
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -15,11 +16,10 @@ def register(request):
         p_form = PatientForm(request.POST)
 
         if u_form.is_valid():
+            username = u_form.cleaned_data.get('username')
             u_form.save()
-            username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
             return redirect('index')
     else:
         u_form = UserRegisterForm()
-        p_form = PatientForm()
-    return render(request, 'register.html', {'u_form': u_form, 'p_form':p_form})
+    return render(request, 'register.html', {'u_form': u_form,})
