@@ -1,48 +1,29 @@
-{% extends 'base.html' %}
-{% block style %}
-    <style>
-      body {
-        padding-bottom: 50px;
-        font-family: "Balsamiq Sans", cursive;
-      }
-      .medical-history {
-        border: solid 1.5px #d0c9c9;
-        padding: 1rem;
-        border-radius: 5px;
-      }
-      .pres-btn {
-        margin: 1rem;
-      }
-    </style>
-{% endblock style %}
-  {% block body %}
-    {% if user.user_type is 1 %}
-    <button type="button" class="btn btn-outline-primary pres-btn">
-      Create Prescription
-    </button>
-    <div class="container">
-      <div class="col-md-9 medical-history">
-        <h4>Date</h4>
-        <p class="text-muted">Symptoms:</p>
-        <p class="text-muted">
-          Prescription:
-        </p>
-        <p class="text-muted">Patient Name:</p>
-      </div>
-    </div>
-    {% elif user.user_type is 2 %}
-    <div class="container">
-      <div class="col-md-9 medical-history">
-        <h4>Date</h4>
-        <p class="text-muted">Symptoms:</p>
-        <p class="text-muted">
-          Loreabsd adkahsrbe fsdaufjf yuasdb sdufifg cusdbd uadbyher cvsdyur
-          vu89ngtcty dfdsf cs yuadhj fufbr vctyafde cyudbg cdbfbrg
-        </p>
-        <button type="button" class="btn btn-primary">Learn More</button>
-      </div>
-    </div>
-    {% else %}
-    May be you are at wroong place
-    {% endif %}
-  {% endblock body %}
+{% extends 'base.html' %} {% block style %} {% endblock style %}
+<!-- body start -->
+{% block body %} {% if user.user_type is 1 %}
+<button type="button" class="btn btn-outline-primary pres-btn">
+  Create Prescription
+</button>
+<div class="container">
+  <div class="col-md-9 medical-history">
+    <h4>Date</h4>
+    <p class="text-muted">Symptoms:</p>
+    <p class="text-muted">
+      Prescription:
+    </p>
+    <p class="text-muted">Patient Name:</p>
+  </div>
+</div>
+{% elif user.user_type is 2 %}
+<div class="container mt-30">
+  <div class="col-md-9 medical-history">
+    <h4>Date</h4>
+    <p class="text-muted">Symptoms:</p>
+    <p class="text-muted">
+      Loreabsd adkahsrbe fsdaufjf yuasdb sdufifg cusdbd uadbyher cvsdyur
+      vu89ngtcty dfdsf cs yuadhj fufbr vctyafde cyudbg cdbfbrg
+    </p>
+    <button type="button" class="btn btn-primary">Learn More</button>
+  </div>
+</div>
+{% else %} May be you are at wroong place {% endif %} {% endblock body %}

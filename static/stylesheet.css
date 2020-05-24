@@ -1,0 +1,75 @@
+body {
+  font-family: "Balsamiq Sans", cursive;
+}
+.mt-30 {
+  margin-top: 3rem;
+}
+/* Accounting */
+.table-dash {
+  background-color: #d0c9c9;
+  width: 100%;
+  padding: 1rem;
+}
+.table-dash button {
+  width: 100%;
+}
+/* Contact US */
+.map-container iframe {
+  width: 100%;
+  height: 500px;
+}
+.map-container {
+  padding: 50px 0;
+}
+#modify-btn {
+  border: solid 1px;
+  border-radius: 0;
+  letter-spacing: 0.1em;
+  padding: 10px 25px;
+}
+.contact-details p {
+  float: right;
+}
+.form-group input,
+.form-group textarea {
+  margin: 1.5rem 0px 0.5rem 0px;
+}
+/* HR DashBoard */
+.pallet {
+  padding: 2rem;
+}
+.pallet section:first-child {
+  padding: 1rem;
+}
+.pallet section:last-child {
+  padding: 1.5rem;
+}
+.table-dash {
+  background-color: #fff;
+  width: 100%;
+  padding: 1rem;
+}
+.table-dash button {
+  width: 100%;
+}
+h4 {
+  border-bottom: dotted 1px grey;
+  padding-bottom: 1rem;
+}
+/* Home */
+ion-icon {
+  color: blue;
+  padding-right: 5px;
+}
+.departments {
+  padding: 2rem;
+}
+/* Medical History */
+.medical-history {
+  border: solid 1.5px #d0c9c9;
+  padding: 1rem;
+}
+/* Prescription */
+.pres-btn {
+  margin: 1rem;
+}

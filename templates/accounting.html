@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block style %} {% endblock style %}
+<!-- body start -->
+{% block body %}
+<div class="row">
+  <div class="col-md-5">
+    <div class="table-dash">
+      <button type="button" class="btn btn-primary">
+        Individual Outstandings
+      </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Outstanding</th>
+            <th>Paid</th>
+            <th>Remainder</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@</td>
+            <td>
+              <button type="button" class="btn btn-info">
+                Send Remainder
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="table-dash">
+      <button type="button" class="btn btn-primary">
+        Consultation's Outstandings
+      </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Patient Name</th>
+            <th>Paid</th>
+            <th>Outstanding</th>
+            <th>Total</th>
+            <th>Invoice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>123873295</td>
+            <td>john@sdf.com</td>
+            <td>F</td>
+            <td>23</td>
+            <td>
+              <a href="#">Open Invoice</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock body %}
