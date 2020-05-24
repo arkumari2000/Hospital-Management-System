@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+{% extends 'base.html' %}
+{% block style %}
     <style>
       body {
         padding-bottom: 50px;
@@ -29,8 +14,8 @@
         margin: 1rem;
       }
     </style>
-  </head>
-  <body>
+{% endblock style %}
+  {% block body %}
     {% if user.user_type is 1 %}
     <button type="button" class="btn btn-outline-primary pres-btn">
       Create Prescription
@@ -60,5 +45,4 @@
     {% else %}
     May be you are at wroong place
     {% endif %}
-  </body>
-</html>
+  {% endblock body %}
