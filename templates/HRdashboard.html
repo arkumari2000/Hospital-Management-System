@@ -84,11 +84,11 @@
           <td>{{ doctor.salary }}</td>
           <td>--</td>
           <td>
-            <button type="button" class="btn btn-info"><a href="{% url 'profile_update' doctor.id %}">Update</a></button>
+            <a href="{% url 'profile_update' doctor.id %}"><button type="button" class="btn btn-info">Update</button></a>
             
           </td>
           <td>
-            <button type="button" class="btn btn-danger"><a href="{% url 'profile_delete' doctor.id %}">Delete</a></button>
+            <a href="{% url 'profile_delete' doctor.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
           </td>
         </tr>
         {% endfor %}

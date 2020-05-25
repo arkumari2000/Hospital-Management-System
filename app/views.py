@@ -40,7 +40,7 @@ def register(request):
 @login_required(login_url='login')
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+    return redirect('index')
 
 
 def about(request):
@@ -151,14 +151,30 @@ def profile(request,id=None):
                 p_form.save()
                 return redirect('hrdashboard')
         return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
-    else:
-        return redirect('index')
+    elif request.user.user_type==4:
+        patient=Patient.objects.filter(id=id).first()
+        u_form=UserUpdationForm(instance=patient.person)
+        p_form=PatientForm(instance=patient)
+        if request.method=='POST':
+            u_form=UserUpdationForm(request.POST)
+            p_form=PatientForm(request.POST)
+            if u_form.is_valid():
+                u_form=UserUpdationForm(request.POST,instance=patient.person)
+                p_form=PatientForm(request.POST,instance=patient)
+                u_form.save()
+                p_form.save()
+                return redirect('recdashboard')
+        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
 
 def delete(request,id):
     if request.user.user_type==3:
         doctor=Doctor.objects.filter(id=id).first()
         doctor.person.delete()
         return redirect('hrdashboard')
+    if request.user.user_type==4:
+        doctor=Patient.objects.filter(id=id).first()
+        doctor.person.delete()
+        return redirect('recdashboard')
 
 def create_prescription(request):
     if request.user.user_type==1:
@@ -182,3 +198,19 @@ def create_appointment(request):
         return render(request,'appointment_form.html',{'form':form,})
     else:
         raise Http404
+
+def create_patient(request):
+    if request.user.user_type==4:
+        u_form=UserUpdationForm()
+        p_form=PatientForm()
+        if request.method=='POST':
+            u_form=UserUpdationForm(request.POST)
+            p_form=PatientForm(request.POST)
+            if u_form.is_valid():
+                user=u_form.save(commit=False)
+                instance=p_form.save(commit=False)
+                instance.user=user
+                user.save()
+                instance.save()
+                return redirect('recdashboard')
+        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})

@@ -73,13 +73,6 @@
             <td>{{ appointment.status }}</td>
           </tr>
           {% endfor %}
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
         </tbody>
       </table>
     </div>
@@ -87,7 +80,8 @@
   <div class="col-md-7">
     <h4>Last 5 Patients</h4>
     <div class="table-dash">
-      <button type="button" class="btn btn-primary">Create Patients</button>
+      <a href="{% url 'create_patient' %}">
+      <button type="button" class="btn btn-primary">Create Patients</button></a>
       <table class="table">
         <thead>
           <tr>
@@ -101,19 +95,21 @@
           </tr>
         </thead>
         <tbody>
+          {% for patient in patients %}
           <tr>
-            <td>John</td>
-            <td>123873295</td>
-            <td>john@sdf.com</td>
-            <td>F</td>
-            <td>23</td>
+            <td>{{ patient.person.username }}</td>
+            <td>{{ patient.Phone }}</td>
+            <td>{{ patient.person.email }}</td>
+            <td>{{ patient.gender }}</td>
+            <td>{{ patient.age }}</td>
             <td>
-              <button type="button" class="btn btn-info">Update</button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-danger">Delete</button>
-            </td>
+            <a href="{% url 'profile_update' patient.id %}"><button type="button" class="btn btn-info">Update</button></a>
+          </td>
+          <td>
+            <a href="{% url 'profile_delete' patient.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+          </td>
           </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
