@@ -46,12 +46,27 @@ A zip file is attached, which you have extract in you computer.
 ## Existing Id's to login and check the interface for different usertype:
 
 1. patient- id: patient
+
+
    password: Samidha123
+   
+   
 2. doctor- id: doctor
+
+
    password:Samidha123
+   
+   
 3. hr- id: hr
+
+
    password:Samidha123
+   
+   
 4.receptionist- id: receptionist
+
+
    password:Samidha123
+   
    Or you can register as a new patient or doctor via registration system.
    You cannot register as hr and receptionsit.
