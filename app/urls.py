@@ -20,6 +20,6 @@ urlpatterns = [
     path('delete/<int:id>/confirm', views.delete_confirm, name='delete_confirm'),
     path('create_prescription', views.create_prescription, name='create_prescription'),
     path('create_appointment', views.create_appointment, name='create_appointment'),
-    path('create_patient', views.create_patient, name='create_patient'),
+    path('create', views.create, name='create'),
     path('create_invoice', views.create_invoice, name='create_invoice'),
 ]

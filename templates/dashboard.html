@@ -67,9 +67,11 @@
 <div class="col-md-12">
   <h4>Doctors</h4>
   <div class="table-dash">
+    <a href="{% url 'create' %}">
     <button type="button" class="btn btn-primary">
       Docotrs
     </button>
+  </a>
     <table class="table">
       <thead>
         <tr>
@@ -104,7 +106,8 @@
           <td>Active</td>
           {% else %}
           <td>Not Active</td>
-          {% endif %} {% if doctor.Department is 1 %}
+          {% endif %}
+          {% if doctor.Department is 1 %}
           <td>Eye Care</td>
           {% elif doctor.Department is 2 %}
           <td>Skin Care</td>
@@ -115,9 +118,8 @@
           {% else %}
           <td>Dental</td>
           {% endif %}
-          <td>{{ doctor.Department }}</td>
+          <td>{{ doctor.attendance }}</td>
           <td>{{ doctor.salary }}</td>
-          <td>--</td>
           <td>
             <a href="{% url 'profile_update' doctor.id %}"
               ><button type="button" class="btn btn-info">Update</button></a
@@ -171,7 +173,7 @@
   <div class="col-md-7">
     <h4>Last 5 Patients</h4>
     <div class="table-dash">
-      <a href="{% url 'create_patient' %}">
+      <a href="{% url 'create' %}">
         <button type="button" class="btn btn-primary">
           Create Patients
         </button></a

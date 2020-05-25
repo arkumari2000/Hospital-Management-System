@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import UserRegisterForm, PatientForm, DoctorForm, PrescriptionForm,UserUpdationForm,UpdateDoctorForm,AppointmentForm
+from .forms import UserRegisterForm, PatientForm, DoctorForm, PrescriptionForm,UserUpdationForm,UpdateDoctorForm,AppointmentForm,InvoiceForm
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -22,15 +22,14 @@ def contact(request):
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
-
         if form.is_valid():
             username = form.cleaned_data.get('username')
             user = form.save()
             user_type = form.cleaned_data.get('user_type')
-            if user_type == 2:
+            if user_type == '2':
                 Patient.objects.create(person=user)
-            if user_type == 1:
-                Doctot.objects.create(person=user)
+            if user_type == '1':
+                Doctor.objects.create(person=user)
             messages.success(request, f'Account created for {username}!')
             return redirect('index')
     else:
@@ -77,7 +76,7 @@ def profile(request,id=None):
             p_form = PatientForm(request.POST)
             if u_form.is_valid():
                 u_form = UserUpdationForm(request.POST, instance=doctor.person)
-                p_form = DoctorForm(request.POST, instance=doctor)
+                p_form = UpdateDoctorForm(request.POST, instance=doctor)
                 u_form.save()
                 p_form.save()
                 return redirect('dashboard')
@@ -116,8 +115,8 @@ def create_prescription(request):
 
 @login_required(login_url='login')
 def create_invoice(request):
-    if request.user.user_type == 1:
-        form = Invoice()
+    if request.user.user_type == 3:
+        form = InvoiceForm()
         if request.method == 'POST':
             form = InvoiceForm(request.POST)
             invoice = form.save(commit=False)
@@ -129,14 +128,12 @@ def create_invoice(request):
 
 @login_required(login_url='login')
 def appointments(request):
-    appointments=Appointment.objects.all()
-    context={
-    'appointments':appointments,
-    }
     if request.user.user_type==1:
-        return render(request, 'appointment.html',context)
+        appointments=request.user.doctor.appointment_set.all()
+        return render(request, 'appointment.html',{'appointments':appointments,})
     elif request.user.user_type==2:
-        return render(request, 'appointment.html',context)
+        appointments=request.user.patient.appointment_set.all()
+        return render(request, 'appointment.html',{'appointments':appointments,})
     else:
         raise Http404
 
@@ -203,8 +200,26 @@ def dashboard(request):
     return render(request, 'dashboard.html',context)
 
 @login_required(login_url='login')
-def create_patient(request):
-    if request.user.user_type == 4:
+def create(request):
+    if request.user.user_type == 3:
+        u_form = UserUpdationForm()
+        p_form = UpdateDoctorForm()
+        if request.method == 'POST':
+            u_form = UserUpdationForm(request.POST)
+            p_form = UpdateDoctorForm(request.POST)
+            if u_form.is_valid():
+                user = u_form.save(commit=False)
+                instance = p_form.save(commit=False)
+                user.username=user.first_name.lower()+"_"+user.last_name.lower()
+                user.user_type=2
+                user.set_password("Samidha123")
+                instance.person = user
+                user.save()
+                instance.save()
+                return redirect('dashboard')
+        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
+
+    elif request.user.user_type == 4:
         u_form = UserUpdationForm()
         p_form = PatientForm()
         if request.method == 'POST':

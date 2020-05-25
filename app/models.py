@@ -28,7 +28,6 @@ DEPARTMENT_CHOICES = (
     (5, 'Dental'),
 )
 
-
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
         (1, 'doctor'),
@@ -44,8 +43,8 @@ class Doctor(models.Model):
     person = models.OneToOneField(User, on_delete=models.CASCADE)
     Department = models.PositiveSmallIntegerField(
         choices=DEPARTMENT_CHOICES, default=4)
-    Address = models.CharField(max_length=100, default=None, blank=True)
-    Phone = models.CharField(max_length=100, default=None, blank=True)
+    Address = models.CharField(max_length=100, default=None, blank=True,null=True)
+    Phone = models.CharField(max_length=100, default=None, blank=True,null=True)
     gender = models.PositiveSmallIntegerField(
         choices=GENDER_CHOICES, default=3)
     STATUS = (
