@@ -66,7 +66,8 @@ class Patient(models.Model):
     person = models.OneToOneField(User, on_delete=models.CASCADE)
     Address = models.CharField(max_length=100, blank=True, null=True)
     Phone = models.CharField(max_length=100, blank=True, null=True)
-    gender = models.CharField(max_length=100, blank=True, null=True)
+    gender = models.PositiveSmallIntegerField(
+        choices=GENDER_CHOICES, default=3)
     age = models.IntegerField(blank=True, default=None, null=True)
     case_paper = models.IntegerField(blank=True, null=True)
     records = models.FileField(upload_to='records', blank=True)
