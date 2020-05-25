@@ -17,6 +17,7 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('profile/<int:id>', views.profile, name='profile_update'),
     path('delete/<int:id>', views.delete, name='profile_delete'),
+    path('delete/<int:id>/confirm', views.delete_confirm, name='delete_confirm'),
     path('create_prescription', views.create_prescription, name='create_prescription'),
     path('create_appointment', views.create_appointment, name='create_appointment'),
     path('create_patient', views.create_patient, name='create_patient'),

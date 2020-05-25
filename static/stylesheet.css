@@ -74,3 +74,6 @@ ion-icon {
 .pres-btn {
   margin: 1rem;
 }
+.delete-div {
+        border: solid 2px #e2cfcf;
+      }

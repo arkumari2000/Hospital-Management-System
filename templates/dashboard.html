@@ -118,7 +118,7 @@
             
           </td>
           <td>
-            <a href="{% url 'profile_delete' doctor.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+            <a href="{% url 'delete_confirm' doctor.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
           </td>
         </tr>
         {% endfor %}
@@ -188,7 +188,7 @@
             <a href="{% url 'profile_update' patient.id %}"><button type="button" class="btn btn-info">Update</button></a>
           </td>
           <td>
-            <a href="{% url 'profile_delete' patient.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+            <a href="{% url 'delete_confirm' patient.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
           </td>
           </tr>
           {% endfor %}

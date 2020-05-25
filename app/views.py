@@ -164,6 +164,11 @@ def delete(request,id):
     else:
         raise Http404
 
+def delete_confirm(request,id):
+    return render(request,"delete.html",{
+        'id':id,
+        })
+
 def dashboard(request):
     if request.user.user_type==3:
         doctors=Doctor.objects.all()
@@ -196,7 +201,10 @@ def create_patient(request):
             if u_form.is_valid():
                 user = u_form.save(commit=False)
                 instance = p_form.save(commit=False)
-                instance.user = user
+                user.username=user.first_name.lower()+"_"+user.last_name.lower()
+                user.user_type=2
+                user.set_password("Samidha123")
+                instance.person = user
                 user.save()
                 instance.save()
                 return redirect('dashboard')

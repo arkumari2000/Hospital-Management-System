@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+  {% block body %}
+    <div class="col-md-6 delete-div">
+      <p class="text-muted">
+        Are you sure you want to detete "Name here"
+      </p>
+      <button type="button" class="btn btn-warning">Cancel</button>
+      <a href="{% url 'profile_delete' id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+    </div>
+{% endblock body %}
