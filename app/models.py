@@ -42,17 +42,6 @@ class Doctor(models.Model):
     def __str__(self):
         return self.person.username
 
-class Receptionist(models.Model):
-    person = models.OneToOneField(User, on_delete=models.CASCADE)
-    Address = models.CharField(max_length=100 , default=None)
-    Email = models.CharField(max_length=100 , default=None)
-    Phone = models.CharField(max_length=100 , default=None)
-    gender = models.CharField(max_length=100 , default=None)
-
-    def __str__(self):
-        return self.person.user.username
-
-
 class Patient(models.Model):
     person = models.OneToOneField(User, on_delete=models.CASCADE)
     Address = models.CharField(max_length=100 , blank=True,null=True)

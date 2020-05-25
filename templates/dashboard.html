@@ -1,50 +1,132 @@
-{% extends 'base.html' %} {% block style %} {% endblock style %}
+{% extends 'base.html' %}
 <!--body Start  -->
 {% block body %}
 <div class="row">
   <div class="col-md-4 pallet">
     <section class="bg-info text-center rounded-top">
       <div class="container">
-        <h5 style="margin-bottom: 0px;">Total Appointment</h5>
+        <h5 style="margin-bottom: 0px;">
+          {% if user.user_type is 3 %}
+          Total Doctor
+          {% elif user.user_type is 4 %}
+          Total Appointment
+          {% endif %}
+      </h5>
       </div>
       <!-- /.container-->
     </section>
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        {{ appointments.count }}
+        {% if user.user_type is 3 %}
+          {{ doctors.count }}
+          {% elif user.user_type is 4 %}
+          {{ appointments.count }}
+          {% endif %}
       </div>
     </section>
   </div>
   <div class="col-md-4 pallet">
     <section class="bg-info text-center rounded-top">
       <div class="container">
-        <h5 style="margin-bottom: 0px;">Appointment Done</h5>
+        <h5 style="margin-bottom: 0px;">
+          {% if user.user_type is 3 %}
+          Total Patient
+          {% elif user.user_type is 4 %}
+          Appointment Done
+          {% endif %}
+      </h5>
       </div>
       <!-- /.container-->
     </section>
 
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        {{ approved }}
+        {% if user.user_type is 3 %}
+          {{ patients }}
+          {% elif user.user_type is 4 %}
+          {{ approved }}
+          {% endif %}
       </div>
     </section>
   </div>
   <div class="col-md-4 pallet">
     <section class="bg-info text-center rounded-top">
       <div class="container">
-        <h5 style="margin-bottom: 0px;">Upcoming Appointment</h5>
+        <h5 style="margin-bottom: 0px;">
+        {% if user.user_type is 3 %}
+          On Duty Doctors
+          {% elif user.user_type is 4 %}
+          Upcoming Appointment
+          {% endif %}
+      </h5>
       </div>
       <!-- /.container-->
     </section>
-
     <section class="bg-primary text-center rounded-bottom">
       <div class="container h2">
-        {{ appointments.count }} - {{ approved }}
+        {% if user.user_type is 3 %}
+          {{ active }}
+          {% elif user.user_type is 4 %}
+          {{ appointments.count }} - {{ approved }}
+          {% endif %}
       </div>
     </section>
   </div>
 </div>
+{% if user.user_type is 3 %}
+<div class="col-md-12">
+  <h4>Doctors</h4>
+  <div class="table-dash">
+    <button type="button" class="btn btn-primary">
+      Docotrs
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>Status</th>
+          <th>Department</th>
+          <th>Attendence</th>
+          <th>Salary</th>
+          <th>Update</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for doctor in doctors %}
+        <tr>
+          <td>{{ doctor.person.first_name }} {{ doctor.person.last_name }}</td>
+          <td>{{ doctor.Phone }}</td>
+          <td>{{ doctor.person.email }}</td>
+          <td>{{ doctor.gender }}</td>
+          <td>25</td>
+          {% if doctor.status is 1 %}
+          <td>Active</td>
+          {% else %}
+          <td>Not Active</td>
+          {% endif %}
+          <td>{{ doctor.Department }}</td>
+          <td>{{ doctor.salary }}</td>
+          <td>--</td>
+          <td>
+            <a href="{% url 'profile_update' doctor.id %}"><button type="button" class="btn btn-info">Update</button></a>
+            
+          </td>
+          <td>
+            <a href="{% url 'profile_delete' doctor.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% elif user.user_type is 4 %}
 <div class="row">
   <div class="col-md-5">
     <h4>Appointments:</h4>
@@ -115,4 +197,5 @@
     </div>
   </div>
 </div>
+{% endif %}
 {% endblock body %}
