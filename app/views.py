@@ -82,10 +82,14 @@ def account(request):
 
 @login_required(login_url='login')
 def appointments(request):
+    appointments=Appointment.objects.all()
+    context={
+    'appointments':appointments,
+    }
     if request.user.user_type==1:
-        return render(request, 'appointment.html')
+        return render(request, 'appointment.html',context)
     elif request.user.user_type==2:
-        return render(request, 'appointment.html')
+        return render(request, 'appointment.html',context)
     else:
         return HttpResponse(f'user_type is {request.user.user_type} {type(request.user.user_type)}')
 

@@ -12,12 +12,14 @@
       </tr>
     </thead>
     <tbody>
+      {% for appointment in appointments %}
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>-</td>
+        <td>{{ appointment.date }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>{{ appointment.doctor.person.first_name }}</td>
+        <td>{{ appointment.status }}</td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
@@ -32,11 +34,13 @@
       </tr>
     </thead>
     <tbody>
+      {% for appointment in appointments %}
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+        <td>{{ appointment.date }}</td>
+        <td>{{ appointment.time }}</td>
+        <td>{{ appointment.doctor.person.first_name }}</td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>

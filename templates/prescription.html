@@ -1,7 +1,9 @@
 {% extends 'base.html' %} {% block style %} {% endblock style %}
 <!-- body start -->
 {% block body %}
+{% if prescriptions %}
  {% if user.user_type is 1 %}
+}
 <button type="button" class="btn btn-outline-primary pres-btn">
   <a href="{% url 'create_prescription' %}">
   Create Prescription</a>
@@ -23,4 +25,13 @@
   </div>
 </div>
 {% endfor %}
+{% else %}
+  {% if user.user_type is 1 %}
+  <button type="button" class="btn btn-outline-primary pres-btn">
+  <a href="{% url 'create_prescription' %}">
+  Create Prescription</a>
+</button>
+  {% endif %}
+  No Prescriptions
+  {% endif %}
 {% endblock body %}
