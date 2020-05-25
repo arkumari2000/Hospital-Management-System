@@ -1,37 +1,26 @@
 {% extends 'base.html' %} {% block style %} {% endblock style %}
 <!-- body start -->
-{% block body %}
-{% if prescriptions %}
- {% if user.user_type is 1 %}
-}
+{% block body %} {% if prescriptions %} {% if user.user_type is 1 %} }
 <button type="button" class="btn btn-outline-primary pres-btn">
-  <a href="{% url 'create_prescription' %}">
-  Create Prescription</a>
+  <a href="{% url 'create_prescription' %}"> Create Prescription</a>
 </button>
-{% endif %}
-{% for prescription in prescriptions %}
-<div class="container">
+{% endif %} {% for prescription in prescriptions %}
+<div class="container mt-30">
   <div class="col-md-9 medical-history">
     <h4>Date :- {{ prescription.date }}</h4>
     <p class="text-muted">Symptoms: {{ prescription.Symptoms }}</p>
     <p class="text-muted">
       Prescription: {{ prescription.Description }}
     </p>
-     {% if user.user_type is 1 %}
+    {% if user.user_type is 1 %}
     <p class="text-muted">Patient Name: {{ prescription.patient }}</p>
     {% else %}
     <button type="button" class="btn btn-primary">Learn More</button>
     {% endif %}
   </div>
 </div>
-{% endfor %}
-{% else %}
-  {% if user.user_type is 1 %}
-  <button type="button" class="btn btn-outline-primary pres-btn">
-  <a href="{% url 'create_prescription' %}">
-  Create Prescription</a>
+{% endfor %} {% else %} {% if user.user_type is 1 %}
+<button type="button" class="btn btn-outline-primary pres-btn">
+  <a href="{% url 'create_prescription' %}"> Create Prescription</a>
 </button>
-  {% endif %}
-  No Prescriptions
-  {% endif %}
-{% endblock body %}
+{% endif %} No Prescriptions {% endif %} {% endblock body %}

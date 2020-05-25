@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="#">Logo</a>
+  <a class="navbar-brand" href="#"
+    ><img src="../static/images/medlogo.png" height="50" width="70"
+  /></a>
 
   <!-- Links -->
   <ul class="navbar-nav">
@@ -13,30 +15,29 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'contact' %}">Contact</a>
     </li>
-    {% if user.is_authenticated %}
-    {% if user.user_type is 1 %}
+    {% if user.is_authenticated %} {% if user.user_type is 1 %}
     <li class="nav-item">
-          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments' %}">Appointments</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'prescription' %}">Prescriptions</a>
-        </li>
+      <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'appointments' %}">Appointments</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'prescription' %}">Prescriptions</a>
+    </li>
     {% elif user.user_type is 2 %}
     <li class="nav-item">
-          <a class="nav-link" href="{% url 'appointments' %}">Your Appointment's</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'invoice' %}">Invoice & Payments</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'prescription' %}">Medical History</a>
-        </li>
+      <a class="nav-link" href="{% url 'appointments' %}">Your Appointment's</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'invoice' %}">Invoice & Payments</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'prescription' %}">Medical History</a>
+    </li>
     {% elif user.user_type is 3 %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
@@ -50,9 +51,8 @@
         </li>
     {% endif %}
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        <a href="{% url 'logout' %}">
-        Logout</a>
-      </button>
+      <a href="{% url 'logout' %}"> Logout</a>
+    </button>
     {% else %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'register' %}">Register</a>

@@ -19,17 +19,18 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html')
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
 
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            user=form.save()
-            user_type=form.cleaned_data.get('user_type')
-            if user_type==2:
+            user = form.save()
+            user_type = form.cleaned_data.get('user_type')
+            if user_type == 2:
                 Patient.objects.create(person=user)
-            if user_type==1:
+            if user_type == 1:
                 Doctot.objects.create(person=user)
             messages.success(request, f'Account created for {username}!')
             return redirect('index')
@@ -48,51 +49,52 @@ def profile(request,id=None):
             u_form=UserUpdationForm(request.POST)
             p_form=PatientForm(request.POST)
             if u_form.is_valid():
-                u_form=UserUpdationForm(request.POST,instance=request.user)
-                p_form=DoctorForm(request.POST,instance=doctor)
+                u_form = UserUpdationForm(request.POST, instance=request.user)
+                p_form = DoctorForm(request.POST, instance=doctor)
                 u_form.save()
                 p_form.save()
                 return redirect('profile')
-        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
-    elif request.user.user_type==2:
-        patient=request.user.patient
-        u_form=UserUpdationForm(instance=request.user)
-        p_form=PatientForm(instance=patient)
-        if request.method=='POST':
-            u_form=UserUpdationForm(request.POST)
-            p_form=PatientForm(request.POST)
+        return render(request, 'profile.html', {'u_form': u_form, 'p_form': p_form})
+    elif request.user.user_type == 2:
+        patient = request.user.patient
+        u_form = UserUpdationForm(instance=request.user)
+        p_form = PatientForm(instance=patient)
+        if request.method == 'POST':
+            u_form = UserUpdationForm(request.POST)
+            p_form = PatientForm(request.POST)
             if u_form.is_valid():
-                u_form=UserUpdationForm(request.POST,instance=request.user)
-                p_form=PatientForm(request.POST,instance=patient)
+                u_form = UserUpdationForm(request.POST, instance=request.user)
+                p_form = PatientForm(request.POST, instance=patient)
                 u_form.save()
                 p_form.save()
                 return redirect('profile')
-        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
-    elif request.user.user_type==3:
-        doctor=Doctor.objects.filter(id=id).first()
-        user=doctor.person
-        u_form=UserUpdationForm(instance=doctor.person)
-        p_form=UpdateDoctorForm(instance=doctor)
-        if request.method=='POST':
-            u_form=UserUpdationForm(request.POST)
-            p_form=PatientForm(request.POST)
+        return render(request, 'profile.html', {'u_form': u_form, 'p_form': p_form})
+    elif request.user.user_type == 3:
+        doctor = Doctor.objects.filter(id=id).first()
+        user = doctor.person
+        u_form = UserUpdationForm(instance=doctor.person)
+        p_form = UpdateDoctorForm(instance=doctor)
+        if request.method == 'POST':
+            u_form = UserUpdationForm(request.POST)
+            p_form = PatientForm(request.POST)
             if u_form.is_valid():
-                u_form=UserUpdationForm(request.POST,instance=doctor.person)
-                p_form=DoctorForm(request.POST,instance=doctor)
+                u_form = UserUpdationForm(request.POST, instance=doctor.person)
+                p_form = DoctorForm(request.POST, instance=doctor)
                 u_form.save()
                 p_form.save()
                 return redirect('hrdashboard')
-        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
-    elif request.user.user_type==4:
-        patient=Patient.objects.filter(id=id).first()
-        u_form=UserUpdationForm(instance=patient.person)
-        p_form=PatientForm(instance=patient)
-        if request.method=='POST':
-            u_form=UserUpdationForm(request.POST)
-            p_form=PatientForm(request.POST)
+        return render(request, 'profile.html', {'u_form': u_form, 'p_form': p_form})
+    elif request.user.user_type == 4:
+        patient = Patient.objects.filter(id=id).first()
+        u_form = UserUpdationForm(instance=patient.person)
+        p_form = PatientForm(instance=patient)
+        if request.method == 'POST':
+            u_form = UserUpdationForm(request.POST)
+            p_form = PatientForm(request.POST)
             if u_form.is_valid():
-                u_form=UserUpdationForm(request.POST,instance=patient.person)
-                p_form=PatientForm(request.POST,instance=patient)
+                u_form = UserUpdationForm(
+                    request.POST, instance=patient.person)
+                p_form = PatientForm(request.POST, instance=patient)
                 u_form.save()
                 p_form.save()
                 return redirect('recdashboard')
@@ -102,12 +104,12 @@ def profile(request,id=None):
 
 @login_required(login_url='login')
 def create_prescription(request):
-    if request.user.user_type==1:
-        form=PrescriptionForm()
-        if request.method=='POST':
-            form=PrescriptionForm(request.POST)
-            prescription=form.save(commit=False)
-            prescription.doctor=request.user.doctor
+    if request.user.user_type == 1:
+        form = PrescriptionForm()
+        if request.method == 'POST':
+            form = PrescriptionForm(request.POST)
+            prescription = form.save(commit=False)
+            prescription.doctor = request.user.doctor
             prescription.save()
             return redirect('prescription')
         return render(request,'presform.html',{'form':form,})
@@ -154,11 +156,11 @@ def delete(request,id):
     if request.user.user_type==3:
         doctor=Doctor.objects.filter(id=id).first()
         doctor.person.delete()
-        return redirect('hrdashboard')
+        return redirect('dashboard')
     elif request.user.user_type==4:
         doctor=Patient.objects.filter(id=id).first()
         doctor.person.delete()
-        return redirect('recdashboard')
+        return redirect('dashboard')
     else:
         raise Http404
 
@@ -185,19 +187,19 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def create_patient(request):
-    if request.user.user_type==4:
-        u_form=UserUpdationForm()
-        p_form=PatientForm()
-        if request.method=='POST':
-            u_form=UserUpdationForm(request.POST)
-            p_form=PatientForm(request.POST)
+    if request.user.user_type == 4:
+        u_form = UserUpdationForm()
+        p_form = PatientForm()
+        if request.method == 'POST':
+            u_form = UserUpdationForm(request.POST)
+            p_form = PatientForm(request.POST)
             if u_form.is_valid():
-                user=u_form.save(commit=False)
-                instance=p_form.save(commit=False)
-                instance.user=user
+                user = u_form.save(commit=False)
+                instance = p_form.save(commit=False)
+                instance.user = user
                 user.save()
                 instance.save()
-                return redirect('recdashboard')
+                return redirect('dashboard')
         return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
     else:
         raise Http404
