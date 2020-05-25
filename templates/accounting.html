@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block style %} {% endblock style %}
+{% extends 'base.html' %}
 <!-- body start -->
 {% block body %}
 <div class="row">
@@ -17,16 +17,18 @@
           </tr>
         </thead>
         <tbody>
+          {% for invoice in invoices %}
           <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@</td>
+            <td>{{ invoice.name }}</td>
+            <td>{{ invoice.remain }}</td>
+            <td>{{ invoice.paid }}</td>
             <td>
               <button type="button" class="btn btn-info">
                 Send Remainder
               </button>
             </td>
           </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -48,16 +50,20 @@
           </tr>
         </thead>
         <tbody>
+          {% for invoice in invoices %}
           <tr>
-            <td>John</td>
-            <td>123873295</td>
-            <td>john@sdf.com</td>
-            <td>F</td>
-            <td>23</td>
-            <td>
-              <a href="#">Open Invoice</a>
-            </td>
+            <td>{{ invoice.date }}</td>
+            <td>{{ invoice.name }}</td>
+            <td>{{ invoice.paid }}</td>
+            <td>{{ invoice.remain }}</td>
+            <td>{{ invoice.paid }}+{{ invoice.remain }}</td>
+            {% if invoice.link %}
+            <td><a href="{{ invoice.link.url }}" onerror="this.href='#';">Open Invoice</a></td>
+            {% else %}
+            <td><a href="#">Open Invoice</a></td>
+            {% endif %}
           </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

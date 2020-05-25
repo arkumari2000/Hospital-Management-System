@@ -1,5 +1,5 @@
 from django import forms
-from .models import  Appointment, Patient , Doctor, Prescription,User
+from .models import  Appointment, Patient , Doctor, Prescription,User,Invoice
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 
@@ -48,3 +48,8 @@ class PrescriptionForm(forms.ModelForm):
     class Meta:
         model=Prescription
         fields= ['Description','Symptoms','patient']
+
+class InvoiceForm(forms.ModelForm):
+    class Meta:
+        model=Invoice
+        fields='__all__'

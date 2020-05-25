@@ -37,7 +37,6 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form, })
 
-
 @login_required(login_url='login')
 def profile(request,id=None):
     if request.user.user_type==1:
@@ -116,6 +115,19 @@ def create_prescription(request):
         raise Http404
 
 @login_required(login_url='login')
+def create_invoice(request):
+    if request.user.user_type == 1:
+        form = Invoice()
+        if request.method == 'POST':
+            form = InvoiceForm(request.POST)
+            invoice = form.save(commit=False)
+            invoice.save()
+            return redirect('account')
+        return render(request,'presform.html',{'form':form,})
+    else:
+        raise Http404
+
+@login_required(login_url='login')
 def appointments(request):
     appointments=Appointment.objects.all()
     context={
@@ -148,7 +160,8 @@ def invoice(request):
 
 @login_required(login_url='login')
 def account(request):
-    return render(request, 'accounting.html')
+    invoices=Invoice.objects.all()
+    return render(request, 'accounting.html',{'invoices':invoices,})
 
 @login_required(login_url='login')
 def delete(request,id):

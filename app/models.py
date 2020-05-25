@@ -96,3 +96,6 @@ class Invoice(models.Model):
 
     def __str__(self):
         return str(self.patient)
+
+    def name(self):
+        return f'{self.patient.person.first_name} {self.patient.person.last_name}'
