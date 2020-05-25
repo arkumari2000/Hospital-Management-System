@@ -19,7 +19,6 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html')
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -82,7 +81,7 @@ def profile(request,id=None):
                 p_form = DoctorForm(request.POST, instance=doctor)
                 u_form.save()
                 p_form.save()
-                return redirect('hrdashboard')
+                return redirect('dashboard')
         return render(request, 'profile.html', {'u_form': u_form, 'p_form': p_form})
     elif request.user.user_type == 4:
         patient = Patient.objects.filter(id=id).first()
@@ -220,7 +219,7 @@ def create_appointment(request):
             form=AppointmentForm(request.POST)
             if form.is_valid():
                 form.save()
-            return redirect('recdashboard')
+            return redirect('dashboard')
         return render(request,'appointment_form.html',{'form':form,})
     else:
         raise Http404
