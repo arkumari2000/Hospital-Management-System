@@ -1,23 +1,27 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import UserRegisterForm, PatientForm, DoctorForm, PrescriptionForm,UserUpdationForm,UpdateDoctorForm,AppointmentForm,InvoiceForm
+from .forms import UserRegisterForm, PatientForm, DoctorForm, PrescriptionForm, UserUpdationForm, UpdateDoctorForm, AppointmentForm, InvoiceForm
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout, login
 from django.http import Http404
-from .models import User,Doctor,Patient,Appointment,Invoice,Prescription
+from .models import User, Doctor, Patient, Appointment, Invoice, Prescription
 
 # Create your views here.
+
 
 def index(request):
     return render(request, 'index.html')
 
+
 def about(request):
     return render(request, 'about.html')
 
+
 def contact(request):
     return render(request, 'contact.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -36,15 +40,16 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form, })
 
+
 @login_required(login_url='login')
-def profile(request,id=None):
-    if request.user.user_type==1:
-        doctor=request.user.doctor
-        u_form=UserUpdationForm(instance=request.user)
-        p_form=DoctorForm(instance=doctor)
-        if request.method=='POST':
-            u_form=UserUpdationForm(request.POST)
-            p_form=PatientForm(request.POST)
+def profile(request, id=None):
+    if request.user.user_type == 1:
+        doctor = request.user.doctor
+        u_form = UserUpdationForm(instance=request.user)
+        p_form = DoctorForm(instance=doctor)
+        if request.method == 'POST':
+            u_form = UserUpdationForm(request.POST)
+            p_form = PatientForm(request.POST)
             if u_form.is_valid():
                 u_form = UserUpdationForm(request.POST, instance=request.user)
                 p_form = DoctorForm(request.POST, instance=doctor)
@@ -94,10 +99,11 @@ def profile(request,id=None):
                 p_form = PatientForm(request.POST, instance=patient)
                 u_form.save()
                 p_form.save()
-                return redirect('recdashboard')
-        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
+                return redirect('dashboard')
+        return render(request, 'profile.html', {'u_form': u_form, 'p_form': p_form})
     else:
         raise Http404
+
 
 @login_required(login_url='login')
 def create_prescription(request):
@@ -109,9 +115,10 @@ def create_prescription(request):
             prescription.doctor = request.user.doctor
             prescription.save()
             return redirect('prescription')
-        return render(request,'presform.html',{'form':form,})
+        return render(request, 'presform.html', {'form': form, })
     else:
         raise Http404
+
 
 @login_required(login_url='login')
 def create_invoice(request):
@@ -122,82 +129,90 @@ def create_invoice(request):
             invoice = form.save(commit=False)
             invoice.save()
             return redirect('account')
-        return render(request,'presform.html',{'form':form,})
+        return render(request, 'presform.html', {'form': form, })
     else:
         raise Http404
+
 
 @login_required(login_url='login')
 def appointments(request):
-    if request.user.user_type==1:
-        appointments=request.user.doctor.appointment_set.all()
-        return render(request, 'appointment.html',{'appointments':appointments,})
-    elif request.user.user_type==2:
-        appointments=request.user.patient.appointment_set.all()
-        return render(request, 'appointment.html',{'appointments':appointments,})
+    if request.user.user_type == 1:
+        appointments = request.user.doctor.appointment_set.all()
+        return render(request, 'appointment.html', {'appointments': appointments, })
+    elif request.user.user_type == 2:
+        appointments = request.user.patient.appointment_set.all()
+        return render(request, 'appointment.html', {'appointments': appointments, })
     else:
         raise Http404
+
 
 @login_required(login_url='login')
 def prescription(request):
-    if request.user.user_type==1:
-        prescriptions=request.user.doctor.prescription_set.all()
-        return render(request, 'prescription.html',{'prescriptions':prescriptions,})
-    elif request.user.user_type==2:
-        prescriptions=request.user.patient.prescription_set.all()
-        return render(request, 'prescription.html',{'prescriptions':prescriptions,})
+    if request.user.user_type == 1:
+        prescriptions = request.user.doctor.prescription_set.all()
+        return render(request, 'prescription.html', {'prescriptions': prescriptions, })
+    elif request.user.user_type == 2:
+        prescriptions = request.user.patient.prescription_set.all()
+        return render(request, 'prescription.html', {'prescriptions': prescriptions, })
     else:
         raise Http404
+
 
 @login_required(login_url='login')
 def invoice(request):
-    invoices=request.user.patient.invoice_set.all()
+    invoices = request.user.patient.invoice_set.all()
     if not invoices:
-        invoices=("-","-","-","-")
-    return render(request, 'invoice.html',{'invoices':invoices,})
+        invoices = ("-", "-", "-", "-")
+    return render(request, 'invoice.html', {'invoices': invoices, })
+
 
 @login_required(login_url='login')
 def account(request):
-    invoices=Invoice.objects.all()
-    return render(request, 'accounting.html',{'invoices':invoices,})
+    invoices = Invoice.objects.all()
+    return render(request, 'accounting.html', {'invoices': invoices, })
+
 
 @login_required(login_url='login')
-def delete(request,id):
-    if request.user.user_type==3:
-        doctor=Doctor.objects.filter(id=id).first()
+def delete(request, id):
+    if request.user.user_type == 3:
+        doctor = Doctor.objects.filter(id=id).first()
         doctor.person.delete()
         return redirect('dashboard')
-    elif request.user.user_type==4:
-        doctor=Patient.objects.filter(id=id).first()
+    elif request.user.user_type == 4:
+        doctor = Patient.objects.filter(id=id).first()
         doctor.person.delete()
         return redirect('dashboard')
     else:
         raise Http404
 
-def delete_confirm(request,id):
-    return render(request,"delete.html",{
-        'id':id,
-        })
+
+def delete_confirm(request, id):
+    return render(request, "delete.html", {
+        'id': id,
+    })
+
 
 def dashboard(request):
-    if request.user.user_type==3:
-        doctors=Doctor.objects.all()
-        active=Doctor.objects.filter(status=1).count()
-        patients=Patient.objects.all().count()
-        context={
-        'doctors':doctors,
-        'active':active,
-        'patients':patients,
+    if request.user.user_type == 3:
+        doctors = Doctor.objects.all()
+        active = Doctor.objects.filter(status=1).count()
+        patients = Patient.objects.all().count()
+        context = {
+            'doctors': doctors,
+            'active': active,
+            'patients': patients,
         }
-    elif request.user.user_type==4:
-        appointments=Appointment.objects.all()
-        patients=Patient.objects.all()
-        approved=Appointment.objects.filter(status='AP').count()
-        context={
-        'appointments':appointments,
-        'patients':patients,
-        'approved':approved,
+    elif request.user.user_type == 4:
+        appointments = Appointment.objects.all()
+        patients = Patient.objects.all()
+        approved = Appointment.objects.filter(status='AP').count()
+        context = {
+            'appointments': appointments,
+            'patients': patients,
+            'approved': approved,
         }
-    return render(request, 'dashboard.html',context)
+    return render(request, 'dashboard.html', context)
+
 
 @login_required(login_url='login')
 def create(request):
@@ -210,14 +225,14 @@ def create(request):
             if u_form.is_valid():
                 user = u_form.save(commit=False)
                 instance = p_form.save(commit=False)
-                user.username=user.first_name.lower()+"_"+user.last_name.lower()
-                user.user_type=2
+                user.username = user.first_name.lower()+"_"+user.last_name.lower()
+                user.user_type = 2
                 user.set_password("Samidha123")
                 instance.person = user
                 user.save()
                 instance.save()
                 return redirect('dashboard')
-        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
+        return render(request, 'profile.html', {'u_form': u_form, 'p_form': p_form})
 
     elif request.user.user_type == 4:
         u_form = UserUpdationForm()
@@ -228,29 +243,31 @@ def create(request):
             if u_form.is_valid():
                 user = u_form.save(commit=False)
                 instance = p_form.save(commit=False)
-                user.username=user.first_name.lower()+"_"+user.last_name.lower()
-                user.user_type=2
+                user.username = user.first_name.lower()+"_"+user.last_name.lower()
+                user.user_type = 2
                 user.set_password("Samidha123")
                 instance.person = user
                 user.save()
                 instance.save()
                 return redirect('dashboard')
-        return render(request,'profile.html',{'u_form':u_form,'p_form':p_form})
+        return render(request, 'profile.html', {'u_form': u_form, 'p_form': p_form})
     else:
         raise Http404
 
+
 @login_required(login_url='login')
 def create_appointment(request):
-    if request.user.user_type==4:
-        form=AppointmentForm()
-        if request.method=='POST':
-            form=AppointmentForm(request.POST)
+    if request.user.user_type == 4:
+        form = AppointmentForm()
+        if request.method == 'POST':
+            form = AppointmentForm(request.POST)
             if form.is_valid():
                 form.save()
             return redirect('dashboard')
-        return render(request,'appointment_form.html',{'form':form,})
+        return render(request, 'appointment_form.html', {'form': form, })
     else:
         raise Http404
+
 
 @login_required(login_url='login')
 def user_logout(request):

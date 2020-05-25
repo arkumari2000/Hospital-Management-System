@@ -5,6 +5,9 @@ body {
 .mt-30 {
   margin-top: 3rem;
 }
+.row {
+  margin: 0px;
+}
 /* Accounting */
 .table-dash {
   background-color: #d0c9c9;
@@ -75,5 +78,8 @@ ion-icon {
   margin: 1rem;
 }
 .delete-div {
-        border: solid 2px #e2cfcf;
-      }
+  border: solid 2px #e2cfcf;
+}
+.form-check {
+  padding: 1.25rem;
+}
