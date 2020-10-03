@@ -10,18 +10,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='patient',
-            name='Email',
-        ),
-        migrations.RemoveField(
-            model_name='patient',
-            name='bio',
-        ),
-        migrations.RemoveField(
-            model_name='patient',
-            name='location',
-        ),
+        migrations.RemoveField(model_name='patient', name='Email',),
+        migrations.RemoveField(model_name='patient', name='bio',),
+        migrations.RemoveField(model_name='patient', name='location',),
         migrations.AddField(
             model_name='patient',
             name='age',
@@ -30,7 +21,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='patient',
             name='blood_group',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'A+'), (2, 'A-'), (3, 'B+'), (4, 'B-'), (5, 'AB+'), (6, 'AB-'), (7, 'O+'), (8, 'O-')], default=7),
+            field=models.PositiveSmallIntegerField(
+                choices=[
+                    (1, 'A+'),
+                    (2, 'A-'),
+                    (3, 'B+'),
+                    (4, 'B-'),
+                    (5, 'AB+'),
+                    (6, 'AB-'),
+                    (7, 'O+'),
+                    (8, 'O-'),
+                ],
+                default=7,
+            ),
         ),
         migrations.AddField(
             model_name='patient',

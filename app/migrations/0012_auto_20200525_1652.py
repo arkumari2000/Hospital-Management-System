@@ -13,11 +13,22 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='doctor',
             name='Department',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'Eye Care'), (2, 'Skin Care'), (3, 'Surgery'), (4, 'Physical Therapy'), (5, 'Dental')], default=4),
+            field=models.PositiveSmallIntegerField(
+                choices=[
+                    (1, 'Eye Care'),
+                    (2, 'Skin Care'),
+                    (3, 'Surgery'),
+                    (4, 'Physical Therapy'),
+                    (5, 'Dental'),
+                ],
+                default=4,
+            ),
         ),
         migrations.AlterField(
             model_name='doctor',
             name='gender',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'Female'), (2, 'Male'), (3, 'Others')], default=3),
+            field=models.PositiveSmallIntegerField(
+                choices=[(1, 'Female'), (2, 'Male'), (3, 'Others')], default=3
+            ),
         ),
     ]

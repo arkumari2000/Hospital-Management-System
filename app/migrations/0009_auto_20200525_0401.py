@@ -11,14 +11,9 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RenameField(
-            model_name='doctor',
-            old_name='Email',
-            new_name='Department',
+            model_name='doctor', old_name='Email', new_name='Department',
         ),
-        migrations.RemoveField(
-            model_name='doctor',
-            name='Speciality',
-        ),
+        migrations.RemoveField(model_name='doctor', name='Speciality',),
         migrations.AddField(
             model_name='doctor',
             name='attendance',
@@ -32,6 +27,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='doctor',
             name='status',
-            field=models.IntegerField(choices=[(1, 'Active'), (0, 'Not_Active')], default=1),
+            field=models.IntegerField(
+                choices=[(1, 'Active'), (0, 'Not_Active')], default=1
+            ),
         ),
     ]

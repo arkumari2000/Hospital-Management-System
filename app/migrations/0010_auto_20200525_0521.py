@@ -10,13 +10,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='appointment',
-            name='message',
-        ),
+        migrations.RemoveField(model_name='appointment', name='message',),
         migrations.AlterField(
             model_name='appointment',
             name='status',
-            field=models.CharField(choices=[('PD', 'Pending'), ('AP', 'Approved')], default='PD', max_length=2),
+            field=models.CharField(
+                choices=[('PD', 'Pending'), ('AP', 'Approved')],
+                default='PD',
+                max_length=2,
+            ),
         ),
     ]
