@@ -1,4 +1,7 @@
 {% extends 'base.html' %} {% block style %} {% endblock style %}
+{% block title %}
+<title> Prescription</title>
+{% endblock title %}
 <!-- body start -->
 {% block body %} {% if prescriptions %} {% if user.user_type is 1 %} }
 <button type="button" class="btn btn-outline-primary pres-btn">

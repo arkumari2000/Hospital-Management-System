@@ -11,48 +11,28 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RenameField(
-            model_name='appointment',
-            old_name='Date',
-            new_name='date',
+            model_name='appointment', old_name='Date', new_name='date',
         ),
         migrations.RenameField(
-            model_name='appointment',
-            old_name='Doctor',
-            new_name='doctor',
+            model_name='appointment', old_name='Doctor', new_name='doctor',
         ),
         migrations.RenameField(
-            model_name='appointment',
-            old_name='Patient',
-            new_name='patient',
+            model_name='appointment', old_name='Patient', new_name='patient',
         ),
         migrations.RenameField(
-            model_name='appointment',
-            old_name='Time',
-            new_name='time',
+            model_name='appointment', old_name='Time', new_name='time',
+        ),
+        migrations.RenameField(model_name='invoice', old_name='Date', new_name='date',),
+        migrations.RenameField(
+            model_name='invoice', old_name='Patient', new_name='patient',
         ),
         migrations.RenameField(
-            model_name='invoice',
-            old_name='Date',
-            new_name='date',
+            model_name='prescription', old_name='Date', new_name='date',
         ),
         migrations.RenameField(
-            model_name='invoice',
-            old_name='Patient',
-            new_name='patient',
+            model_name='prescription', old_name='Doctor', new_name='doctor',
         ),
         migrations.RenameField(
-            model_name='prescription',
-            old_name='Date',
-            new_name='date',
-        ),
-        migrations.RenameField(
-            model_name='prescription',
-            old_name='Doctor',
-            new_name='doctor',
-        ),
-        migrations.RenameField(
-            model_name='prescription',
-            old_name='Patient',
-            new_name='patient',
+            model_name='prescription', old_name='Patient', new_name='patient',
         ),
     ]

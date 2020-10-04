@@ -13,6 +13,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='patient',
             name='gender',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'Female'), (2, 'Male'), (3, 'Others')], default=3),
+            field=models.PositiveSmallIntegerField(
+                choices=[(1, 'Female'), (2, 'Male'), (3, 'Others')], default=3
+            ),
         ),
     ]
